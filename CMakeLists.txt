@@ -1,4 +1,6 @@
-cmake_minimum_required(VERSION 2.8)
+# This file originally came from https://sources.debian.net/data/main/c/cld2/0.0.0-git20150806-2/CMakeLists.txt
+# There is a debian_cmake_vendor branch to track & merge changes to the upstream file
+cmake_minimum_required(VERSION 3.0)
 project (cld2)
 enable_language(CXX)
 
@@ -48,6 +50,19 @@ set (cld2_dynamic_SOURCE_FILES
     internal/cld2_dynamic_data.cc
     internal/cld2_dynamic_data_loader.cc
     )
+
+# OSX
+if(APPLE)
+  set(CMAKE_MACOSX_RPATH ON)
+  set(CMAKE_SKIP_BUILD_RPATH FALSE)
+  set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
+  set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+  set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+  list(FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES "${CMAKE_INSTALL_PREFIX}/lib" isSystemDir)
+  if("${isSystemDir}" STREQUAL "-1")
+    set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+  endif()
+endif()
 
 add_library(cld2 SHARED ${common_SOURCE_FILES} ${cld2_SOURCE_FILES})
 set_target_properties(cld2 PROPERTIES
