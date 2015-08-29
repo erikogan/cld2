@@ -10,7 +10,7 @@ set (common_SOURCE_FILES
     internal/compact_lang_det_hint_code.cc
     internal/compact_lang_det_impl.cc
     internal/debug.cc
-    internal/fixunicodevalue.cc 
+    internal/fixunicodevalue.cc
     internal/generated_entities.cc
     internal/generated_language.cc
     internal/generated_ulscript.cc
